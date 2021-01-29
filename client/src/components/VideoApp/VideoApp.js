@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import Call from '../Call/Call';
 import StartButton from '../StartButton/StartButton';
 import api from '../../api';
-import './App.css';
+import './VideoApp.css';
 import Tray from '../Tray/Tray';
 import CallObjectContext from '../../CallObjectContext';
 import { roomUrlFromPageUrl, pageUrlFromRoomUrl } from '../../urlUtils';
