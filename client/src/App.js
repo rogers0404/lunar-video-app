@@ -1,9 +1,12 @@
 import React from "react";
-//import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { BrowserRouter as Router} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+//import { BrowserRouter as Router, Switch} from "react-router-dom";
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
-import './App.css';
+import { ChakraProvider, Grid, GridItem   } from "@chakra-ui/react";
+//import {  Box } from "@chakra-ui/react" 
+import Nav from './components/Nav/Nav';
+import Home from './components/Home/Home';
 
 /* import Home from "./pages/Home";
 import Detail from "./pages/Detail";
@@ -33,33 +36,36 @@ function App() {
       <Router>
         <div>
           <StoreProvider>
-          <div class="topnav">
-              <a class="active" href="#home">Home</a>
-              <a href="#news">News</a>
-              <a href="#contact">Contact</a>
-              <a href="#about">About</a>
-          </div>
-              <div> 
-                  <h1> Lucky day / Fun ideas</h1>
-              </div>
-
-              <div> 
-                  <h2> Lucky day / Fun ideas</h2>
-              </div>
-
-              <div> 
-                  <h3> Lucky day / Fun ideas</h3>
-              </div>
-            {/* <Nav />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/orderHistory" component={OrderHistory} />
-              <Route exact path="/products/:id" component={Detail} />
-              <Route exact path="/success" component={Success} />
-              <Route component={NoMatch} />
-            </Switch> */}
+              <ChakraProvider>
+              
+                  <Nav />
+                  {/*Layout for the app using Chakra-UI */}
+                  <Grid
+                      h="85vh"
+                      templateRows="repeat(9, 1fr)"
+                      templateColumns="repeat(5, 1fr)"
+                      gap={4}
+                    >
+                      <GridItem rowSpan={9} colSpan={1} bg="transparent" />
+                      <GridItem rowSpan={1} colSpan={3} bg="transparent" />
+                      <GridItem rowSpan={9} colSpan={1} bg="transparent" />
+                      <GridItem rowSpan={7} colSpan={3} bg="transparent"> 
+                            <Switch>
+                                <Route exact path="/" component={Home} />
+                              {/*  <Route exact path="/login" component={Login} />
+                                <Route exact path="/signup" component={Signup} />
+                                <Route exact path="/orderHistory" component={OrderHistory} />
+                                <Route exact path="/products/:id" component={Detail} />
+                                <Route exact path="/success" component={Success} />
+                                <Route component={NoMatch} /> */}
+                            </Switch>
+                      
+                      </GridItem>
+                      <GridItem rowSpan={1} colSpan={3} bg="transparent" />
+                    </Grid>
+                  
+                  {/*Layout for the app using Chakra-UI */}
+              </ChakraProvider>
           </StoreProvider>
         </div>
       </Router>

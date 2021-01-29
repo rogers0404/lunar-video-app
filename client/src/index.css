@@ -9,15 +9,15 @@ body {
 
 
       /* The image used */
-      background-image: url("./images/moon-background2.jpg");
+     /*  background-image: url("./images/moon-background2.jpg"); */
     
       /* Full height */
-      height: 100%;
+      /* height: 100%; */
     
       /* Center and scale the image nicely */
-      background-position: inherit;
+      /* background-position: inherit;
       background-repeat: no-repeat;
-      background-size: cover;
+      background-size: cover; */
   
 }
 
