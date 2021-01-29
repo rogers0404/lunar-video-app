@@ -29,5 +29,7 @@ client/package-lock.json
 server/package-lock.json
 .vscode
 package-lock.json
+server/routes
+server/controllers
 
 text
