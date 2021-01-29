@@ -1,8 +1,11 @@
 import React from "react";
 //import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { BrowserRouter as Router} from "react-router-dom";
+import { BrowserRouter as Router, Link} from "react-router-dom";
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
+import "./App.css";
+import Nav from "./components/Nav/Nav"
+
 
 /* import Home from "./pages/Home";
 import Detail from "./pages/Detail";
@@ -32,11 +35,9 @@ function App() {
       <Router>
         <div>
           <StoreProvider>
-              <div> 
-                  <h1> Lucky day / Fun ideas</h1>
-              </div>
-            {/* <Nav />
-            <Switch>
+          <Nav/>
+           
+            {/*<Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
@@ -45,7 +46,8 @@ function App() {
               <Route exact path="/success" component={Success} />
               <Route component={NoMatch} />
             </Switch> */}
-          </StoreProvider>
+         
+            </StoreProvider>
         </div>
       </Router>
     </ApolloProvider>
