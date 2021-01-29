@@ -11,7 +11,8 @@
 
 .tile video {
   width: 100%;
-  position: absolute;
+  position: absolute;/* absolute;*/
+/*   left: 0; */
   top: 0px;
 }
 

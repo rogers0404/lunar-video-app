@@ -141,6 +141,7 @@ function getMessage(callState) {
   } else if (Object.keys(callState.callItems).length === 1) {
     header = "Copy and share this page's URL to invite others";
     detail = window.location.href;
+    //console.log("detail => "+ detail);
   }
   return header || detail ? { header, detail, isError } : null;
 }

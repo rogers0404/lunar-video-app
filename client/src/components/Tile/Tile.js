@@ -31,7 +31,7 @@ export default function Tile(props) {
   }, [props.audioTrack]);
 
   function getLoadingComponent() {
-    return props.isLoading && <p className="loading">Loading...</p>;
+    return props.isLoading && <p className="loading">Loading...</p>; //put the image loading
   }
 
   function getVideoComponent() {
