@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useMutation } from '@apollo/react-hooks';
 import Auth from "../../utils/auth";
 import { ADD_USER } from "../../utils/mutations";
+import { Container, Text, Heading, FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
+
 
 function Signup(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
@@ -30,60 +32,50 @@ function Signup(props) {
   };
 
   return (
-    <div className="container my-1">
+    <Container>
       <Link to="/login">
-        ← Go to Login
+        <Text color="#faf0ca" fontSize={{ base: "12px", md: "16px", lg: "18px" }}>
+              ← Go to Login
+        </Text>       
       </Link>
 
-      <h2>Signup</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="firstName">First Name:</label>
-          <input
-            placeholder="First"
-            name="firstName"
-            type="firstName"
-            id="firstName"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="lastName">Last Name:</label>
-          <input
-            placeholder="Last"
-            name="lastName"
-            type="lastName"
-            id="lastName"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email:</label>
-          <input
-            placeholder="youremail@test.com"
-            name="email"
-            type="email"
-            id="email"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
-          <input
-            placeholder="******"
-            name="password"
-            type="password"
-            id="pwd"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row flex-end">
-          <button type="submit">
-            Submit
-          </button>
-        </div>
-      </form>
-    </div>
+      <Heading  color="#faf0ca" as="h2" size="xl" fontSize={{ base: "20px", md: "34px", lg: "40px" }} padding="3">Signup</Heading>
+      <FormControl>
+              <FormLabel color="#faf0ca">First Name</FormLabel>
+              <Input type="firstName" placeholder="Your First Name"
+                  name="firstName"
+                  id="firstName"
+                  color="white"
+                  onChange={handleChange}/>
+                  <FormLabel color="#white">Email address</FormLabel>
+              <Input type="lastName" placeholder="Your Last Name"
+                  name="lastName"
+                  id="lastName"
+                  color="white"
+                  onChange={handleChange}/>
+              <FormLabel color="#faf0ca">Email address</FormLabel>
+              <Input type="email" placeholder="youremail@test.com"
+                  name="email"
+                  id="email"
+                  color="white"
+                  onChange={handleChange}/>
+              <FormLabel color="#faf0ca">Password</FormLabel>
+              <Input placeholder="******" type="password"
+                  name="password"            
+                  id="pwd"
+                  color="white"
+                  onChange={handleChange} />
+            <Button
+                mt={4}
+                colorScheme="teal"
+                type="submit"
+                onClick={handleFormSubmit}
+              >
+                Submit
+              </Button>
+      </FormControl>
+    </Container>
+
   );
 
 }
