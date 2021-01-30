@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const QUERY_PRODUCTS = gql`
+<<<<<<< HEAD
   query getProducts($category: ID) {
     products(category: $category) {
       _id
@@ -67,4 +68,19 @@ export const QUERY_CHECKOUT = gql`
       session
     }
   }
+=======
+  query {
+    me {
+      _id
+      email
+      firstName
+      lastName
+      appointment{
+        _id
+        day
+        time
+      }
+    }
+  }
+>>>>>>> feature/login-signup
 `;

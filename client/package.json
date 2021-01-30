@@ -2,17 +2,33 @@
   "name": "lunar-video-app",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
+<<<<<<< HEAD
+=======
+    "@chakra-ui/layout": "^1.2.0",
+    "@chakra-ui/react": "^1.1.6",
+>>>>>>> feature/login-signup
     "@daily-co/daily-js": "^0.9.996",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
     "apollo-boost": "^0.4.9",
+<<<<<<< HEAD
     "graphql": "^15.5.0",
     "graphql-tag": "^2.11.0",
+=======
+    "framer-motion": "^3.2.2-rc.1",
+    "graphql": "^15.5.0",
+    "graphql-tag": "^2.11.0",
+    "jwt-decode": "^3.1.2",
+>>>>>>> feature/login-signup
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
   },
