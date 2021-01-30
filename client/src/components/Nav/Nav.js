@@ -13,8 +13,18 @@ function Nav() {
                 :
                 <a href="/login">Log In</a>
             }
-          <a href="/signup">Sign up</a>
-          <a href="/schedule">Schedulle</a>
+            {
+              Auth.loggedIn() ?
+              <a href="/signup">Sign up</a>
+                :
+                <a href="/signup" onclick={"return false;"}>Sign up</a>
+            }
+            {
+              Auth.loggedIn() ?
+              <a href="/schedule">Schedulle</a>
+                :
+                <a href="/" onclick={"return false;"}>Schedulle</a>
+            }
           <a href="#contact">Contact</a>
           <a href="#about">About</a>
         </div>
