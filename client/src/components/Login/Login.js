@@ -43,6 +43,7 @@ function Login(props) {
               <Input type="email" placeholder="youremail@test.com"
                   name="email"
                   id="email"
+                  color="white"
                   onChange={handleChange}/>
               <FormLabel color="#faf0ca">Password</FormLabel>
               <Input placeholder="******" type="password"
