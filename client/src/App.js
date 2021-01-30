@@ -4,19 +4,16 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import { ChakraProvider, Grid, GridItem   } from "@chakra-ui/react";
-//import {  Box } from "@chakra-ui/react" 
 import Nav from './components/Nav/Nav';
 import Home from './components/Home/Home';
+import Login from "./components/Login/Login";
+import Signup from "./components/Signup/Signup";
 
-/* import Home from "./pages/Home";
-import Detail from "./pages/Detail";
+/* import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
-import Success from "./pages/Success";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Nav from "./components/Nav"; */
+import Success from "./pages/Success"; */
+
 import { StoreProvider } from "./utils/GlobalState";
-/* import OrderHistory from "./pages/OrderHistory"; */
 
 const client = new ApolloClient({
   request: (operation) => {
@@ -52,9 +49,9 @@ function App() {
                       <GridItem rowSpan={7} colSpan={3} bg="transparent"> 
                             <Switch>
                                 <Route exact path="/" component={Home} />
-                              {/*  <Route exact path="/login" component={Login} />
+                                <Route exact path="/login" component={Login} />
                                 <Route exact path="/signup" component={Signup} />
-                                <Route exact path="/orderHistory" component={OrderHistory} />
+                                {/* <Route exact path="/orderHistory" component={OrderHistory} />
                                 <Route exact path="/products/:id" component={Detail} />
                                 <Route exact path="/success" component={Success} />
                                 <Route component={NoMatch} /> */}
