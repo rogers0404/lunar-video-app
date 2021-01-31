@@ -7,13 +7,13 @@ const sendMail = (day, time, link, mail) => {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'rogers.ramirez2008@gmail.com', //email env too
-                pass: 'rArQ#1210'           // env password
+                user: process.env.USER_MAIL, 
+                pass: process.env.USER_PASSWORD           
         }
         });
 
         let mailOptions = {
-        from: 'rogers.ramirez2008@gmail.com',
+        from: 'noreply.lunar.doctor@gmail.com',
         to: 'rogers.ramirez2008@gmail.com', //'r.alberto.usa2018@gmail.com',
         subject: 'Appointment Scheduled on ' + day,
         text: `

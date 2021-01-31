@@ -23,7 +23,7 @@ async function createRoom() {
     method: "POST",
     body: JSON.stringify(options),
     headers: {
-      Authorization: "Bearer 6f137cc133efcb55ef2f00e4e042f76442ae03e2b444c89b5dbbe7376f328b22" // that's my API key
+      Authorization: "Bearer " + process.env.API_KEY // that's my API key
     },
   }),
     room = await response.json();
