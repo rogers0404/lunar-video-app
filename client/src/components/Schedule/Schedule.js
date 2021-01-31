@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Calendar from 'react-calendar';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 //import Auth from "../../utils/auth";
 import api from "../../api"
@@ -6,6 +7,7 @@ import { ADD_APPOINTMENT } from "../../utils/mutations";
 import { Container, Heading, FormControl, FormLabel, Input, Button, Select, Text, Box } from "@chakra-ui/react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import 'react-calendar/dist/Calendar.css';
 import { ME } from "../../utils/queries";
 
 
@@ -25,6 +27,10 @@ function Schedule(props) {
       ); 
 
   const [formState, setFormState] = useState({ day: '', time: ''});
+
+  //calendar state
+  const [value, onChange] = useState(new Date());
+
   const [addAppointment, { error}] = useMutation(ADD_APPOINTMENT);
   const {data} = useQuery(ME);
   const [link, setLink] = useState(null);
@@ -98,6 +104,10 @@ function Schedule(props) {
   return (
     <Container>
       <Heading  color="#faf0ca" as="h2" size="xl" fontSize={{ base: "16px", md: "20px", lg: "30px" }} padding="3">Schedule your Appointment</Heading>
+      <Calendar
+        onChange={onChange}
+        value={value}
+      />
       <FormControl>
               <FormLabel color="#faf0ca">Select day</FormLabel>
               <DatePicker id="day" name="day"
