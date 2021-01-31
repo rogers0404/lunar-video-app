@@ -122,9 +122,9 @@ function Schedule(props) {
                 />
               <FormLabel color="white">Time (Hr)</FormLabel>
               <Select placeholder="Select option" id="time" name="time"  defaultValue="option1" onChange={handleChange} focusBorderColor="blue" color="white" borderColor="blue">
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                    <option value="option1">12:00pm</option>
+                    <option value="option2">2:00pm</option>
+                    <option value="option3">4:00pm</option>
                 </Select>
                 {
               error ? 
