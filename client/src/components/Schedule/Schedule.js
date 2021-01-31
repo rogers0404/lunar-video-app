@@ -35,6 +35,8 @@ function Schedule(props) {
   const {data} = useQuery(ME);
   const [link, setLink] = useState(null);
 
+  console.log(value);
+
   const handleFormSubmit = async event => {
     event.preventDefault();
       /* before to save in DB we need to generate the link  */
@@ -112,7 +114,8 @@ function Schedule(props) {
               <FormLabel color="#faf0ca">Select day</FormLabel>
               <DatePicker id="day" name="day"
                     dateFormat="MM/dd/yyyy"
-                    selected={startDate}
+                    selected={value}
+                    // selected={startDate}
                     minDate={new Date()}
                     onChange={date => {setStartDate(date); setFormState({...formState, day: date.toLocaleDateString("en-US")});}}
                     customInput={<CustomInput/>}
