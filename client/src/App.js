@@ -8,6 +8,7 @@ import Nav from './components/Nav/Nav';
 import Home from './components/Home/Home';
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
+import Schedule from "./components/Schedule/Schedule";
 
 /* import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
@@ -51,8 +52,8 @@ function App() {
                                 <Route exact path="/" component={Home} />
                                 <Route exact path="/login" component={Login} />
                                 <Route exact path="/signup" component={Signup} />
-                                {/* <Route exact path="/orderHistory" component={OrderHistory} />
-                                <Route exact path="/products/:id" component={Detail} />
+                                <Route exact path="/schedule" component={Schedule} />
+                                {/*<Route exact path="/products/:id" component={Detail} />
                                 <Route exact path="/success" component={Success} />
                                 <Route component={NoMatch} /> */}
                             </Switch>

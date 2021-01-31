@@ -13,7 +13,7 @@ const newRoomEndpoint =
  */
 async function createRoom() {
 
-  const exp = Math.round(Date.now() / 1000) + 60 * 30;
+  const exp = Math.round(Date.now() / 1000) + 60 * 30; //it is just last 30 min the room... we need it last the time the meeting is set
   const options = {
     properties: {
       exp: exp,
@@ -29,8 +29,6 @@ async function createRoom() {
     room = await response.json();
   return room;
 
-  // Comment out the above and uncomment the below, using your own URL
-   //return { url: "https://real-video-time.daily.co/meeting" };
 }
 
 export default { createRoom };

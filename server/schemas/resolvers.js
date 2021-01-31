@@ -45,7 +45,7 @@ const resolvers = {
 
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { appointment: args } },
+          { $set: { appointment: args } },
           { new: true }
         );
 
