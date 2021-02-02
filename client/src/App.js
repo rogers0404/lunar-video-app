@@ -41,13 +41,13 @@ function App() {
                   <Grid
                       h="85vh"
                       templateRows="repeat(9, 1fr)"
-                      templateColumns="repeat(5, 1fr)"
+                      templateColumns="repeat(7, 1fr)"
                       gap={4}
                     >
                       <GridItem rowSpan={9} colSpan={1} bg="transparent" />
-                      <GridItem rowSpan={1} colSpan={3} bg="transparent" />
+                      <GridItem rowSpan={1} colSpan={5} bg="transparent" />
                       <GridItem rowSpan={9} colSpan={1} bg="transparent" />
-                      <GridItem rowSpan={7} colSpan={3} bg="transparent"> 
+                      <GridItem rowSpan={7} colSpan={5} bg="transparent"> 
                             <Switch>
                                 <Route exact path="/" component={Home} />
                                 <Route exact path="/login" component={Login} />
@@ -59,7 +59,7 @@ function App() {
                             </Switch>
                       
                       </GridItem>
-                      <GridItem rowSpan={1} colSpan={3} bg="transparent" />
+                      <GridItem rowSpan={1} colSpan={5} bg="transparent" />
                     </Grid>
                   
                   {/*Layout for the app using Chakra-UI */}

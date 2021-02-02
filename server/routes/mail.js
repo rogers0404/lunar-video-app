@@ -7,14 +7,14 @@ const sendMail = (day, time, link, mail) => {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'rogers.ramirez2008@gmail.com', //email env too
-                pass: 'rArQ#1210'           // env password
+                user: 'noreply.lunar.doctor@gmail.com', //email env too
+                pass: 'doctor#lunar'           // env password
         }
         });
 
         let mailOptions = {
-        from: 'rogers.ramirez2008@gmail.com',
-        to: 'rogers.ramirez2008@gmail.com', //'r.alberto.usa2018@gmail.com',
+        from: 'noreply.lunar.doctor@gmail.com',
+        to: mail, // it must be mail
         subject: 'Appointment Scheduled on ' + day,
         text: `
                 Welcome to Lunar Video Doctor
