@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, bookschema } = require('../models');
+const { User, Appointment } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -40,12 +40,12 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    saveBook: async (parent, args, context) => {
+    addAppointment: async (parent, args, context) => {
       if (context.user) {
 
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { savedBooks: args } },
+          { $set: { appointment: args } },
           { new: true }
         );
 
@@ -54,11 +54,26 @@ const resolvers = {
 
       throw new AuthenticationError('You need to be logged in!');
     },
-    removeBook: async (parent,args, context) => {
+    changeAppointment: async (parent,args, context) => {
+      if (context.user) {
+        console.log(context);
+        console.log(context.user);
+        const user = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $set: { appointment: args  } },
+          //{ new: true }
+        );
+            //console.log(user);
+        return user;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    cancelAppointment: async (parent,args, context) => {
       if (context.user) {
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: args } },
+          { $pull: { appointment: args} },
           { new: true }
         );
 

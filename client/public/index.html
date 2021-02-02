@@ -24,11 +24,20 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <!-- Adding Moment -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
+    <title>Lunar Doctor App</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root" 
+        style="background-image: url('%PUBLIC_URL%/images/moon-background2.jpg');
+              background-position: inherit;
+              background-repeat: no-repeat;
+              background-size: cover;
+              height: 100vh;"
+    >
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

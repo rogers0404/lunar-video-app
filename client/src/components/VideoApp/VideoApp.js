@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import Call from '../Call/Call';
 import StartButton from '../StartButton/StartButton';
 import api from '../../api';
-import './App.css';
+import './VideoApp.css';
 import Tray from '../Tray/Tray';
 import CallObjectContext from '../../CallObjectContext';
 import { roomUrlFromPageUrl, pageUrlFromRoomUrl } from '../../urlUtils';
@@ -47,7 +47,7 @@ export default function App() {
    */
   const startJoiningCall = useCallback((url) => {
     const newCallObject = DailyIframe.createCallObject();
-    console.log(url);   //testing the string inside URL
+    console.log("url => " + url);   //testing the string inside URL
     setRoomUrl(url);
     setCallObject(newCallObject);
     setAppState(STATE_JOINING);
@@ -214,7 +214,7 @@ export default function App() {
         // that want to access call object state and bind event listeners to the
         // call object, this can be a helpful pattern.
         <CallObjectContext.Provider value={callObject}>
-          {console.log(roomUrl)}
+          {console.log('roomUrl =>' + roomUrl)}
           <Call roomUrl={roomUrl} />
           <Tray
             disabled={!enableCallButtons}

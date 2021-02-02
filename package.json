@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/rogers0404/lunar-video-app#readme",
   "dependencies": {
-    "if-env": "^1.0.4"
+    "if-env": "^1.0.4",
+    "jwt-decode": "^3.1.2",
+    "react-calendar": "^3.3.1"
   },
   "devDependencies": {
     "concurrently": "^5.3.0"

@@ -5,6 +5,20 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+    color: white;
+
+
+      /* The image used */
+     /*  background-image: url("./images/moon-background2.jpg"); */
+    
+      /* Full height */
+      /* height: 100%; */
+    
+      /* Center and scale the image nicely */
+      /* background-position: inherit;
+      background-repeat: no-repeat;
+      background-size: cover; */
+  
 }
 
 code {
