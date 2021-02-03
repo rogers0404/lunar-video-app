@@ -9,7 +9,7 @@ function Nav() {
           <a className="active" href="/">Home</a>
             {
               Auth.loggedIn() ?
-                <a href="/logout" onClick={() => Auth.logout()}>Logout</a>
+                <a href="/" onClick={() => Auth.logout()}>Logout</a>
                 :
                 <a href="/login">Log In</a>
             }
@@ -24,6 +24,12 @@ function Nav() {
               <a href="/schedule">Schedule</a>
                 :
                 <a href="/">Schedule</a>
+            }
+            {
+              Auth.loggedIn() ?
+              <a href="/myAppointment">My Appointment</a>
+                :
+                null
             }
           <a href="#contact">Contact</a>
           <a href="#about">About</a>

@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const sendMail = (day, time, link, mail) => {
+const sendMail = (day, time, link, mail, subject) => {
 
         let message = '';
 
@@ -15,7 +15,7 @@ const sendMail = (day, time, link, mail) => {
         let mailOptions = {
         from: 'noreply.lunar.doctor@gmail.com',
         to: mail, // it must be mail
-        subject: 'Appointment Scheduled on ' + day,
+        subject: subject + day,
         text: `
                 Welcome to Lunar Video Doctor
                 

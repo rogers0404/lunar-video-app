@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from "react";
-import Calendar from 'react-calendar';
 import { useMutation, useQuery, /* useDisclosure */ } from '@apollo/react-hooks';
 //import Auth from "../../utils/auth";
 import api from "../../api"
@@ -12,7 +11,8 @@ import { Container,
           Button, 
           Select, 
           Text, 
-          Box, } from "@chakra-ui/react";
+          Box, 
+        Flex } from "@chakra-ui/react";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -20,11 +20,14 @@ import 'react-calendar/dist/Calendar.css';
 import { ME } from "../../utils/queries";
 
 
-function Schedule(props) {
+function Appointment() {
     // defining a state for the time for the schedule
   const [startDate, setStartDate] = useState(new Date());
   const [ok, setOK] = useState(false);
   let email = '';
+  const {data} = useQuery(ME);
+  let a = data.me.appointment[0].day;
+  console.log("DAY -> "+a);
     
     // defining a custon input for the datepicker
     const CustomInput = ({ value, onClick }) => (
@@ -33,16 +36,18 @@ function Schedule(props) {
                 color="white"
                 onClick={onClick}
                 onChange={handleChange}
-                value={value}/>
+                value={a}/>
       ); 
 
   const [formState, setFormState] = useState({ day: '', time: ''});
 
-  //calendar state
+  //const [addAppointment] = useMutation(ADD_APPOINTMENT);
+ 
+  const [link, setLink] = useState('');
 
-  const [addAppointment] = useMutation(ADD_APPOINTMENT);
-  const {data} = useQuery(ME);
-  const [link, setLink] = useState(null);
+
+  /* setFormState({...formState, day: data.me.appointment.day,  time: data.me.appointment.time})
+  setLink(data.me.appointment[0].link);  */
 
   const createLink = useCallback(() => {
     return api
@@ -56,14 +61,13 @@ function Schedule(props) {
   const handleFormSubmit = async event => {
     event.preventDefault();
       /************************************************* */
-      
+      createLink().then((url) => {console.log("URL: "+ url); setLink(url)});
       //************************************************ */
-    
+   /*  
     console.log(formState.day)
     console.log(formState.time)
     console.log(link)
     try{
-      await createLink().then((url) => {console.log("URL: "+ url); setLink(url)});
        await addAppointment({
       variables: {
         day: formState.day, time: formState.time, link: link
@@ -80,7 +84,7 @@ function Schedule(props) {
     }catch (e) {
         console.log(e)
     }
-
+ */
 
     /*****************************************************/
     /**Sending the mail with nodemailer */
@@ -124,7 +128,8 @@ function Schedule(props) {
 
   return (
     <Container>
-      <Heading  color="#faf0ca" as="h2" size="xl" fontSize={{ base: "16px", md: "20px", lg: "30px" }} padding="3">Schedule your Appointment</Heading>
+      <Heading  color="#faf0ca" as="h2" size="xl" fontSize={{ base: "16px", md: "20px", lg: "30px" }} padding="3">My Appointment</Heading>
+     
       <FormControl>
               <FormLabel color="#faf0ca">Select day</FormLabel>
               <DatePicker id="day" name="day"
@@ -140,6 +145,7 @@ function Schedule(props) {
                     <option value="2:00pm">2:00pm</option>
                     <option value="4:00pm">4:00pm</option>
                 </Select>
+                <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }} >Link: <a href="/" target="_blank" rel="noreferrer">my link</a></Text>
                  { ok ?
                   <Box>
                     <Text  padding="3"></Text>
@@ -151,15 +157,31 @@ function Schedule(props) {
                       </Box>   
                   </Box>
                   : null
-                 }         
-            <Button
-                    mt={4}
-                    colorScheme="teal"
-                    type="submit"
-                    onClick={handleFormSubmit}
-            >
-                    Submit
-            </Button>
+                 }
+                 <Flex>
+                    <Box>
+                        <Button
+                            mt={4}
+                            colorScheme="teal"
+                            type="submit"
+                            onClick={handleFormSubmit}
+                        >
+                        Reschedule
+                        </Button>
+                    </Box> 
+                    <Box px="4">
+                        <Button
+                            mt={4}
+                            colorScheme="teal"
+                            type="submit"
+                            onClick={handleFormSubmit}
+                        >
+                        Cancel
+                        </Button>
+                    </Box>
+
+                 </Flex>  
+            
       </FormControl> 
 
     </Container>
@@ -168,4 +190,4 @@ function Schedule(props) {
 
 }
 
-export default Schedule;
+export default Appointment;
