@@ -1,8 +1,6 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useMutation, useQuery, /* useDisclosure */ } from '@apollo/react-hooks';
-//import Auth from "../../utils/auth";
-import api from "../../api"
-import { ADD_APPOINTMENT } from "../../utils/mutations";
+import { CANCEL_APPOINTMENT, CHANGE_APPOINTMENT } from "../../utils/mutations";
 import { Container, 
           Heading, 
           FormControl, 
@@ -24,10 +22,11 @@ function Appointment() {
     // defining a state for the time for the schedule
   const [startDate, setStartDate] = useState(new Date());
   const [ok, setOK] = useState(false);
+  const [deleted, setDeleted] = useState(false);
   let email = '';
   const {data} = useQuery(ME);
-  let a = data.me.appointment[0].day;
-  console.log("DAY -> "+a);
+  //let a = data.me.email;
+  console.log(data);
     
     // defining a custon input for the datepicker
     const CustomInput = ({ value, onClick }) => (
@@ -36,84 +35,83 @@ function Appointment() {
                 color="white"
                 onClick={onClick}
                 onChange={handleChange}
-                value={a}/>
+                value={value}/>
       ); 
 
   const [formState, setFormState] = useState({ day: '', time: ''});
 
-  //const [addAppointment] = useMutation(ADD_APPOINTMENT);
+  const [removeAppointment] = useMutation(CANCEL_APPOINTMENT);
  
   const [link, setLink] = useState('');
 
-
-  /* setFormState({...formState, day: data.me.appointment.day,  time: data.me.appointment.time})
-  setLink(data.me.appointment[0].link);  */
-
-  const createLink = useCallback(() => {
-    return api
-      .createRoom()
-      .then((room) => room.url)
-      .catch((error) => {
-        console.log('Error creating room', error);
-      });
-  }, []); 
-
-  const handleFormSubmit = async event => {
-    event.preventDefault();
-      /************************************************* */
-      createLink().then((url) => {console.log("URL: "+ url); setLink(url)});
-      //************************************************ */
-   /*  
-    console.log(formState.day)
-    console.log(formState.time)
-    console.log(link)
-    try{
-       await addAppointment({
-      variables: {
-        day: formState.day, time: formState.time, link: link
-      }
-    });
-    
-    if(data)
+  useEffect(() => {
+    if(data){
+      if(data.me.appointment[0])
+      {
+        console.log(data.me.appointment[0]);
+         setLink(data.me.appointment[0].link); 
          email = data.me.email;
-        else
-        console.log('no imprime nada')
-
-    console.log(email);
-
-    }catch (e) {
-        console.log(e)
+         setFormState({...formState, day: data.me.appointment[0].day, time:data.me.appointment[0].time })
+      }
+     
     }
- */
-
-    /*****************************************************/
-    /**Sending the mail with nodemailer */
-
-    let response = await fetch('/mail', {
-      method: "POST",
-      body: JSON.stringify({
-          day: formState.day,
-          time: formState.time,
-          link: link,
-          mail: email, 
-          subject: 'Appointment Rescheduled on '
-      }),
-      headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-    }),
-      message = await response.json();
-      console.log(message);
-        //window.location.reload('/'); // we need to make anoter component to congratule the success of the operation
-
-    /*****************************************************/
-
-    /*****************setOK all operations ok***********************/
-   
-    setOK(true);
     
-    /*****************************************************/
+  }, [data]);
+  
+  const handleFormSubmitCancel = async event => {
+    event.preventDefault();
+
+    if(data.me.appointment[0])
+    {
+
+      try{
+        const info = await removeAppointment({
+       variables: {
+         day: formState.day, time: formState.time, link: link
+       }
+     });
+   
+     console.log(info);
+ 
+     }catch (e) {
+         console.log(e)
+     }
+  
+ 
+     /*****************************************************/
+     /**Sending the mail with nodemailer */
+ 
+     let response = await fetch('/mail', {
+       method: "POST",
+       body: JSON.stringify({
+           day: formState.day,
+           time: formState.time,
+           link: link,
+           mail: email, 
+           subject: 'Appointment Rescheduled on '
+       }),
+       headers: {
+           Accept: 'application/json',
+           'Content-Type': 'application/json'
+         },
+     }),
+       message = await response.json();
+       console.log(message);
+         //window.location.reload('/'); // we need to make anoter component to congratule the success of the operation
+ 
+     /*****************************************************/
+ 
+     /*****************setOK all operations ok***********************/
+    
+     setDeleted(true);
+     
+     /*****************************************************/
+
+    }
+    else{
+      setDeleted(false)
+    }
+    
   };
 
   const handleChange = event => {
@@ -145,7 +143,14 @@ function Appointment() {
                     <option value="2:00pm">2:00pm</option>
                     <option value="4:00pm">4:00pm</option>
                 </Select>
-                <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }} >Link: <a href="/" target="_blank" rel="noreferrer">my link</a></Text>
+                <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }} py="3">Link: <a href={link} target="_blank" rel="noreferrer">{link}</a></Text>
+                 { deleted ?
+                  <Box>
+                    <Text  padding="3"></Text>
+                      <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }}>Your Appointment has been Canceled</Text>   
+                  </Box>
+                  : null
+                 }
                  { ok ?
                   <Box>
                     <Text  padding="3"></Text>
@@ -164,7 +169,7 @@ function Appointment() {
                             mt={4}
                             colorScheme="teal"
                             type="submit"
-                            onClick={handleFormSubmit}
+                           /*  onClick={handleFormSubmit} */
                         >
                         Reschedule
                         </Button>
@@ -174,7 +179,7 @@ function Appointment() {
                             mt={4}
                             colorScheme="teal"
                             type="submit"
-                            onClick={handleFormSubmit}
+                            onClick={handleFormSubmitCancel}
                         >
                         Cancel
                         </Button>
