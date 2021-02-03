@@ -36,7 +36,7 @@ function Appointment() {
                 color="white"
                 onClick={onClick}
                 onChange={handleChange}
-                value={value}/>
+                value={formState.day}/>
       ); 
 
   const [formState, setFormState] = useState({ day: '', time: ''});
@@ -118,7 +118,7 @@ function Appointment() {
   };
 
   const handleFormSubmitUpdate = async event => {
-    
+
   }
 
   const handleChange = event => {
