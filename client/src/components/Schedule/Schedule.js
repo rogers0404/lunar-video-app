@@ -91,9 +91,9 @@ function Schedule(props) {
       body: JSON.stringify({
           day: formState.day,
           time: formState.time,
-          link: link,
+          link: aLink,
           mail: email, 
-          subject: 'Appointment Rescheduled on '
+          subject: 'Appointment Scheduled on '
       }),
       headers: {
           Accept: 'application/json',

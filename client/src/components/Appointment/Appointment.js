@@ -43,6 +43,7 @@ function Appointment() {
   const [isData, setIsData] = useState(false);
 
   const [removeAppointment] = useMutation(CANCEL_APPOINTMENT);
+  const [changeAppointment] = useMutation(CHANGE_APPOINTMENT);
  
   const [link, setLink] = useState('');
 
@@ -91,7 +92,7 @@ function Appointment() {
            time: formState.time,
            link: link,
            mail: email, 
-           subject: 'Appointment Rescheduled on '
+           subject: 'Appointment Canceled on '
        }),
        headers: {
            Accept: 'application/json',
@@ -118,8 +119,50 @@ function Appointment() {
   };
 
   const handleFormSubmitUpdate = async event => {
-
-  }
+      event.preventDefault();
+  
+      try{
+  
+         await changeAppointment({     
+               variables: {day: formState.day, time: formState.time, link: link }    
+              })
+    /*   
+      if(data)
+           email = data.me.email; */
+  
+      }catch (e) {
+          console.log(e)
+      }
+  
+      /*****************************************************/
+      /**Sending the mail with nodemailer */
+  
+      let response = await fetch('/mail', {
+        method: "POST",
+        body: JSON.stringify({
+            day: formState.day,
+            time: formState.time,
+            link: link,
+            mail: email, 
+            subject: 'Appointment Rescheduled on '
+        }),
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+      }),
+        message = await response.json();
+        console.log(message);
+          //window.location.reload('/'); // we need to make anoter component to congratule the success of the operation
+  
+      /*****************************************************/
+  
+      /*****************setOK all operations ok***********************/
+     
+      setOK(true);
+      
+      /*****************************************************/
+    };
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -140,18 +183,22 @@ function Appointment() {
         <FormLabel color="#faf0ca">Select day</FormLabel>
         <DatePicker id="day" name="day"
               dateFormat="MM/dd/yyyy"
-              selected={startDate}
+              /* selected={startDate} */
               minDate={new Date()}
               onChange={date => {setStartDate(date); setFormState({...formState, day: date.toLocaleDateString("en-US")});}}
               customInput={<CustomInput/>}
           />
         <FormLabel color="white">Time (Hr)</FormLabel>
-        <Select placeholder="Select option" id="time" name="time"  onChange={handleChange} focusBorderColor="blue" color="white" borderColor="blue">
+        <Select placeholder="Select option" id="time" name="time" defaultValue={formState.time} onChange={handleChange} focusBorderColor="blue" color="white" borderColor="blue">
               <option value="12:00pm">12:00pm</option>
               <option value="2:00pm">2:00pm</option>
               <option value="4:00pm">4:00pm</option>
           </Select>
+          { !ok ?
           <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }} py="3">Link: <a href={link} target="_blank" rel="noreferrer">{link}</a></Text>
+              : 
+              null
+          } 
            { deleted ?
             <Box>
               <Text  padding="3"></Text>
