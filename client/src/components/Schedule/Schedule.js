@@ -1,5 +1,4 @@
-import React, { useState, useCallback } from "react";
-import Calendar from 'react-calendar';
+import React, { useState, useCallback, useEffect } from "react";
 import { useMutation, useQuery, /* useDisclosure */ } from '@apollo/react-hooks';
 //import Auth from "../../utils/auth";
 import api from "../../api"
@@ -25,6 +24,9 @@ function Schedule(props) {
   const [startDate, setStartDate] = useState(new Date());
   const [ok, setOK] = useState(false);
   let email = '';
+  let link = '';
+
+  //const [aLink, setALink] =;
     
     // defining a custon input for the datepicker
     const CustomInput = ({ value, onClick }) => (
@@ -42,7 +44,7 @@ function Schedule(props) {
 
   const [addAppointment] = useMutation(ADD_APPOINTMENT);
   const {data} = useQuery(ME);
-  const [link, setLink] = useState(null);
+  const [aLink, setALink] = useState('');
 
   const createLink = useCallback(() => {
     return api
@@ -53,34 +55,33 @@ function Schedule(props) {
       });
   }, []); 
 
+  useEffect(() => {
+    setALink(link)
+  }, [link]);
+
   const handleFormSubmit = async event => {
     event.preventDefault();
-      /************************************************* */
-      
-      //************************************************ */
-    
-    console.log(formState.day)
-    console.log(formState.time)
-    console.log(link)
+
     try{
-      await createLink().then((url) => {console.log("URL: "+ url); setLink(url)});
-       await addAppointment({
-      variables: {
-        day: formState.day, time: formState.time, link: link
-      }
-    });
+
+      createLink()
+      .then((url) => link = url)
+      .then(()=>
+           addAppointment({     
+             variables: {day: formState.day, time: formState.time, link: link }    
+            })
+          )
+      .then((data) => {
+      console.log(data);
+      })
+      .then(()=> setALink(link))
     
     if(data)
          email = data.me.email;
-        else
-        console.log('no imprime nada')
-
-    console.log(email);
 
     }catch (e) {
         console.log(e)
     }
-
 
     /*****************************************************/
     /**Sending the mail with nodemailer */
@@ -114,8 +115,6 @@ function Schedule(props) {
 
   const handleChange = event => {
     const { name, value } = event.target;
-/*     console.log("name " + name);
-    console.log("value " + value) */
     setFormState({
       ...formState,
       [name]: value
@@ -147,7 +146,7 @@ function Schedule(props) {
                       <Box borderRadius="md">
                           <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }}>Day: {formState.day} </Text>
                           <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }}>Time: {formState.time}</Text>
-                          <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }} >Link: <a href={link} target="_blank" rel="noreferrer">{link}</a></Text>
+                          <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }} >Link: <a href={aLink} target="_blank" rel="noreferrer">{aLink}</a></Text>
                       </Box>   
                   </Box>
                   : null
