@@ -124,7 +124,7 @@ function Schedule(props) {
   return (
     <Container>
       <Heading  color="#faf0ca" as="h2" size="xl" fontSize={{ base: "16px", md: "20px", lg: "30px" }} padding="3">Schedule your Appointment</Heading>
-      <FormControl>
+      <FormControl isRequired>
               <FormLabel color="#faf0ca">Select day</FormLabel>
               <DatePicker id="day" name="day"
                     dateFormat="MM/dd/yyyy"

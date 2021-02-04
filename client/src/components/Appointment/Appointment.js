@@ -21,7 +21,7 @@ import { ME } from "../../utils/queries";
 
 function Appointment() {
     // defining a state for the time for the schedule
-  const [startDate, setStartDate] = useState(new Date());
+  const [,  setStartDate] = useState(new Date());
   const [ok, setOK] = useState(false);
   const [deleted, setDeleted] = useState(false);
   let email = '';
@@ -166,8 +166,6 @@ function Appointment() {
 
   const handleChange = event => {
     const { name, value } = event.target;
-/*     console.log("name " + name);
-    console.log("value " + value) */
     setFormState({
       ...formState,
       [name]: value
@@ -179,11 +177,10 @@ function Appointment() {
       <Heading  color="#faf0ca" as="h2" size="xl" fontSize={{ base: "16px", md: "20px", lg: "30px" }} padding="3">My Appointment</Heading>
      {
       isData ?
-        <FormControl>
+        <FormControl isRequired>
         <FormLabel color="#faf0ca">Select day</FormLabel>
         <DatePicker id="day" name="day"
               dateFormat="MM/dd/yyyy"
-              /* selected={startDate} */
               minDate={new Date()}
               onChange={date => {setStartDate(date); setFormState({...formState, day: date.toLocaleDateString("en-US")});}}
               customInput={<CustomInput/>}

@@ -1,10 +1,8 @@
 var CACHE_NAME = 'lunar-doctor-video';
 var urlsToCache = [
   '/',
-  '/login', 
-  '/schedule',
-  '/signup',
-  '/myAppointment', /**/
+  '/src/',
+  '/public/'
 ];
 
 // Install a service worker
