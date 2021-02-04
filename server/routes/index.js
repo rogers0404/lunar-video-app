@@ -12,7 +12,7 @@ const sendMail = require('./mail');
   router.post("/mail", (req, res) => {
     // receiving the data from request
 
-    const message = sendMail(req.body.day, req.body.time, req.body.link, req.body.mail);
+    const message = sendMail(req.body.day, req.body.time, req.body.link, req.body.mail, req.body.subject);
     res.json(message);
 
     // set id based on npm package shortid

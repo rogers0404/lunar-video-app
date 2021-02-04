@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Calendar from 'react-calendar';
+import React, { useState, useCallback, useEffect } from "react";
 import { useMutation, useQuery, /* useDisclosure */ } from '@apollo/react-hooks';
 //import Auth from "../../utils/auth";
 import api from "../../api"
@@ -25,6 +24,9 @@ function Schedule(props) {
   const [startDate, setStartDate] = useState(new Date());
   const [ok, setOK] = useState(false);
   let email = '';
+  let link = '';
+
+  //const [aLink, setALink] =;
     
     // defining a custon input for the datepicker
     const CustomInput = ({ value, onClick }) => (
@@ -39,64 +41,67 @@ function Schedule(props) {
   const [formState, setFormState] = useState({ day: '', time: ''});
 
   //calendar state
-  const [value, onChange] = useState(new Date());
+
   const [addAppointment] = useMutation(ADD_APPOINTMENT);
   const {data} = useQuery(ME);
-  const [link, setLink] = useState(null);
+  const [aLink, setALink] = useState('');
 
-  console.log(value);
-
-  const handleFormSubmit = async event => {
-    event.preventDefault();
-      /* before to save in DB we need to generate the link  */
-      api
+  const createLink = useCallback(() => {
+    return api
       .createRoom()
-      .then((room) => setLink(room.url))
+      .then((room) => room.url)
       .catch((error) => {
         console.log('Error creating room', error);
       });
-      //************************************************ */
-    
-    console.log(formState.day)
-    console.log(formState.time)
-    console.log(link)
+  }, []); 
+
+  useEffect(() => {
+    setALink(link)
+  }, [link]);
+
+  const handleFormSubmit = async event => {
+    event.preventDefault();
+
     try{
-       await addAppointment({
-      variables: {
-        day: formState.day, time: formState.time, link: link
-      }
-    });
+
+      createLink()
+      .then((url) => link = url)
+      .then(()=>
+           addAppointment({     
+             variables: {day: formState.day, time: formState.time, link: link }    
+            })
+          )
+      .then((data) => {
+      console.log(data);
+      })
+      .then(()=> setALink(link))
     
     if(data)
          email = data.me.email;
-        else
-        console.log('no imprime nada')
-
-    console.log(email);
 
     }catch (e) {
         console.log(e)
     }
 
-
     /*****************************************************/
     /**Sending the mail with nodemailer */
 
     let response = await fetch('/mail', {
-        method: "POST",
-        body: JSON.stringify({
-            day: formState.day,
-            time: formState.time,
-            link: link,
-            mail: email
-        }),
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
+      method: "POST",
+      body: JSON.stringify({
+          day: formState.day,
+          time: formState.time,
+          link: aLink,
+          mail: email, 
+          subject: 'Appointment Scheduled on '
       }),
-        message = await response.json();
-        console.log(message);
+      headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+    }),
+      message = await response.json();
+      console.log(message);
         //window.location.reload('/'); // we need to make anoter component to congratule the success of the operation
 
     /*****************************************************/
@@ -110,8 +115,6 @@ function Schedule(props) {
 
   const handleChange = event => {
     const { name, value } = event.target;
-/*     console.log("name " + name);
-    console.log("value " + value) */
     setFormState({
       ...formState,
       [name]: value
@@ -121,23 +124,17 @@ function Schedule(props) {
   return (
     <Container>
       <Heading  color="#faf0ca" as="h2" size="xl" fontSize={{ base: "16px", md: "20px", lg: "30px" }} padding="3">Schedule your Appointment</Heading>
-      <Calendar
-        onChange={onChange}
-        value={value}
-        minDate={new Date()}
-      />
-      <FormControl>
+      <FormControl isRequired>
               <FormLabel color="#faf0ca">Select day</FormLabel>
               <DatePicker id="day" name="day"
                     dateFormat="MM/dd/yyyy"
-                    selected={value}
-                    // selected={startDate}
+                    selected={startDate}
                     minDate={new Date()}
                     onChange={date => {setStartDate(date); setFormState({...formState, day: date.toLocaleDateString("en-US")});}}
                     customInput={<CustomInput/>}
                 />
               <FormLabel color="white">Time (Hr)</FormLabel>
-              <Select placeholder="Select option" id="time" name="time"  defaultValue="option1" onChange={handleChange} focusBorderColor="blue" color="white" borderColor="blue">
+              <Select placeholder="Select option" id="time" name="time"  onChange={handleChange} focusBorderColor="blue" color="white" borderColor="blue">
                     <option value="12:00pm">12:00pm</option>
                     <option value="2:00pm">2:00pm</option>
                     <option value="4:00pm">4:00pm</option>
@@ -149,7 +146,7 @@ function Schedule(props) {
                       <Box borderRadius="md">
                           <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }}>Day: {formState.day} </Text>
                           <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }}>Time: {formState.time}</Text>
-                          <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }} >Link: <a href={link} target="_blank" rel="noreferrer">{link}</a></Text>
+                          <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }} >Link: <a href={aLink} target="_blank" rel="noreferrer">{aLink}</a></Text>
                       </Box>   
                   </Box>
                   : null

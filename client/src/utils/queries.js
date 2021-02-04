@@ -11,6 +11,7 @@ export const ME = gql`
         _id
         day
         time
+        link
       }
     }
   }
