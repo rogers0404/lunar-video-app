@@ -47,7 +47,7 @@ function Signup(props) {
                   id="firstName"
                   color="white"
                   onChange={handleChange}/>
-                  <FormLabel color="#white">Email address</FormLabel>
+                  <FormLabel color="#faf0ca">Last Name</FormLabel>
               <Input type="lastName" placeholder="Your Last Name"
                   name="lastName"
                   id="lastName"
