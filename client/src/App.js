@@ -9,6 +9,7 @@ import Home from './components/Home/Home';
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import Schedule from "./components/Schedule/Schedule";
+import Appointment from "./components/Appointment/Appointment";
 
 /* import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
@@ -32,7 +33,11 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div>
+        <div style={{ 
+  backgroundImage: `url(${process.env.PUBLIC_URL + '/images/moon-background2.jpg'})`,
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
+}}>
           <StoreProvider>
               <ChakraProvider>
               
@@ -53,10 +58,7 @@ function App() {
                                 <Route exact path="/login" component={Login} />
                                 <Route exact path="/signup" component={Signup} />
                                 <Route exact path="/schedule" component={Schedule} />
-                                {/*<Route exact path="/products/:id" component={Detail} />
-                                <Route exact path="/success" component={Success} />
-                                <Route component={NoMatch} /> */}
-                            </Switch>
+                                <Route exact path="/myAppointment" component={Appointment} />                            </Switch>
                       
                       </GridItem>
                       <GridItem rowSpan={1} colSpan={5} bg="transparent" />
