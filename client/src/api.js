@@ -31,4 +31,4 @@ async function createRoom() {
 
 }
 
-module.exports = {createRoom};
+export default { createRoom };
