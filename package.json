@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/rogers0404/lunar-video-app#readme",
   "dependencies": {
+    "build": "^0.1.4",
     "if-env": "^1.0.4"
   },
   "devDependencies": {

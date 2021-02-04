@@ -1,0 +1,22 @@
+{
+    "icons": [
+        {
+          "src": "/img/icons/icons-192.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        },
+    {
+        "src": "/img/icons/icons-512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+    }
+    ] 
+    ,
+    "name": "Lunar Doctor",
+    "short_name": "Lunar",
+    "description": "An application where you can create an account to schedule an appointment with a doctor. You login to the application, pick a date in the calendar, pick an available time and you will receive an email with a link to your video call with an available doctor.",
+    "orientation": "portrait",
+    "display": "standalone",
+    "background_color": "#C8A2C8",
+    "theme_color": "#fffff"
+  }

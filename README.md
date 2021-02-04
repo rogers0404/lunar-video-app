@@ -12,7 +12,7 @@ GIVEN a Lunar Video Doctor App
 WHEN I load the Video Doctor App
 THEN I am presented with a menu with the options Home, Login, Signup, Schedule for Making an Appointment, Contact and About and a message for Welcome to the App
 WHEN I click on the Home menu option
-THEN I am presented a welcoming message
+THEN I am presentedD a welcoming message
 WHEN I click on the Conctact menu option
 THEN I am presented with the contact information
 WHEN I click on the About menu option
