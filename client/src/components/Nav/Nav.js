@@ -24,12 +24,13 @@ const Nav = props => {
       padding="1.5rem"
       bgGradient="linear(to-r,blue.900,gray.500,blue.900)"
       color="white"
+      borderRadius="sm"
       {...props}
     >
       <Flex align="center" mr={5}>
         <Heading as="h1" size="2xl" letterSpacing={"-.1rem"} >
         <Link href="/">  
-        Lunar Doctor
+        Lunar⚕️Doctor
         </Link>
         </Heading>
       </Flex>
@@ -55,9 +56,9 @@ const Nav = props => {
         <MenuItems className="active" >
         {
           Auth.loggedIn() ?
-          <Link href="/schedule">My Appointments</Link>
-            :
-          <Link href="/">My Appointments</Link>
+              <Link href="/myAppointment">My Appointment</Link>
+                :
+                null
         }
         </MenuItems>
 
@@ -88,7 +89,7 @@ const Nav = props => {
         <Button bg="transparent" border="1px">
         {
           Auth.loggedIn() ?
-            <Link href="/logout" onClick={() => Auth.logout()} bg="transparent" border="1px">Logout</Link>
+            <Link href="/logout" onClick={() => Auth.logout()} bg="transparent">Logout</Link>
             :
             <Link href="/login" bg="transparent">Log In</Link>
         }
