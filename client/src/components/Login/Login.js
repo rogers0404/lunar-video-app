@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { Link } from "react-router-dom";
 import { LOGIN } from "../../utils/mutations"
 import Auth from "../../utils/auth";
-import { Container, Text, Heading, FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
+import { Container, Text, Box, Heading, FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
 
 function Login(props) {
   const [formState, setFormState] = useState({ email: '', password: '' })
@@ -30,22 +30,28 @@ function Login(props) {
 
   return (
     <Container>
+    <Box 
+    padding="4"  
+    bgGradient="linear(to-r,blue.900,gray.500,blue.900)" 
+    borderRadius="lg" 
+    color="white" 
+    maxW="3xl">
       <Link to="/signup">
-        <Text color="#faf0ca" fontSize={{ base: "12px", md: "16px", lg: "18px" }}>
+        <Text color="white" fontSize="sm">
                 ← Go to Signup
         </Text>
        
       </Link>
 
-      <Heading  color="#faf0ca" as="h2" size="xl" fontSize={{ base: "20px", md: "34px", lg: "40px" }} padding="3">Login</Heading>
+      <Heading  color="white" as="h1" size="2xl"  padding="3">Login</Heading>
       <FormControl>
-              <FormLabel color="#faf0ca">Email address</FormLabel>
+              <FormLabel color="white">Email address</FormLabel>
               <Input type="email" placeholder="youremail@test.com"
                   name="email"
                   id="email"
                   color="white"
                   onChange={handleChange}/>
-              <FormLabel color="#faf0ca">Password</FormLabel>
+              <FormLabel color="white">Password</FormLabel>
               <Input placeholder="******" type="password"
                   name="password"            
                   id="pwd"
@@ -54,7 +60,7 @@ function Login(props) {
               {
               error ? 
                 <Container>
-                  <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }}>The provided credentials are incorrect</Text>
+                  <Text color="white" fontSize="lg">The provided credentials are incorrect</Text>
                 </Container> : null
             }
             <Button
@@ -66,6 +72,7 @@ function Login(props) {
                 Submit
               </Button>
       </FormControl>
+      </Box>
     </Container>
   );
 }

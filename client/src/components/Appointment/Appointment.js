@@ -8,6 +8,7 @@ import { Container,
           FormLabel, 
           Input, 
           Button, 
+          ButtonGroup,
           Select, 
           Text, 
           Box, 
@@ -174,11 +175,17 @@ function Appointment() {
 
   return (
     <Container>
-      <Heading  color="#faf0ca" as="h2" size="xl" fontSize={{ base: "16px", md: "20px", lg: "30px" }} padding="3">My Appointment</Heading>
+    <Box 
+        padding="4"  
+        bgGradient="linear(to-r,blue.900,gray.500,blue.900)" 
+        borderRadius="lg" 
+        color="white" 
+        maxW="3xl"> 
+      <Heading  color="white" as="h2" size="xl" fontSize={{ base: "16px", md: "20px", lg: "30px" }} padding="3">My Appointment</Heading>
      {
       isData ?
         <FormControl isRequired>
-        <FormLabel color="#faf0ca">Select day</FormLabel>
+        <FormLabel color="white">Select day</FormLabel>
         <DatePicker id="day" name="day"
               dateFormat="MM/dd/yyyy"
               minDate={new Date()}
@@ -192,31 +199,32 @@ function Appointment() {
               <option value="4:00pm">4:00pm</option>
           </Select>
           { !ok ?
-          <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }} py="3">Link: <a href={link} target="_blank" rel="noreferrer">{link}</a></Text>
+          <Text color="white" fontSize="sm" py="3">Link: <a href={link} target="_blank" rel="noreferrer">{link}</a></Text>
               : 
               null
           } 
            { deleted ?
             <Box>
               <Text  padding="3"></Text>
-                <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }}>Your Appointment has been Canceled</Text>   
+                <Text color="white" fontSize="sm">Your Appointment has been Canceled!</Text>   
             </Box>
             : null
            }
            { ok ?
             <Box>
               <Text  padding="3"></Text>
-                <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }}>An email was sent with the information below </Text>
+                <Text color="white" fontSize={{ base: "8px", md: "12px", lg: "16px" }}>An email was sent with the information below </Text>
                 <Box borderRadius="md">
-                    <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }}>Day: {formState.day} </Text>
-                    <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }}>Time: {formState.time}</Text>
-                    <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }} >Link: <a href={link} target="_blank" rel="noreferrer">{link}</a></Text>
+                    <Text color="white" fontSize={{ base: "8px", md: "12px", lg: "16px" }}>Day: {formState.day} </Text>
+                    <Text color="white" fontSize={{ base: "8px", md: "12px", lg: "16px" }}>Time: {formState.time}</Text>
+                    <Text color="white" fontSize={{ base: "8px", md: "12px", lg: "16px" }} >Link: <a href={link} target="_blank" rel="noreferrer">{link}</a></Text>
                 </Box>   
             </Box>
             : null
            }
            <Flex>
               <Box>
+              <ButtonGroup flexWrap="wrap" size="sm" spacing="4">
                   <Button
                       mt={4}
                       colorScheme="teal"
@@ -225,8 +233,6 @@ function Appointment() {
                   >
                   Reschedule
                   </Button>
-              </Box> 
-              <Box px="4">
                   <Button
                       mt={4}
                       colorScheme="teal"
@@ -235,21 +241,25 @@ function Appointment() {
                   >
                   Cancel
                   </Button>
-              </Box>
+              </ButtonGroup>
+              </Box> 
+              
            </Flex>        
         </FormControl>        
         :
         <Box>
-          <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }} py="3">You don't have an Appointment Registered</Text>
+          <Text color="white" fontSize="sm" py="3">You don't have an Appointment Registered</Text>
           <Link to="/schedule">
-          <Text color="#faf0ca" fontSize={{ base: "12px", md: "16px", lg: "18px" }}>
+          <Text color="white" fontSize="sm">
                   ← Go to Schedule
           </Text>       
         </Link>
       </Box>
+
+      
     }
        
-
+    </Box>
     </Container>
 
   );

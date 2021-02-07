@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useMutation } from '@apollo/react-hooks';
 import Auth from "../../utils/auth";
 import { ADD_USER } from "../../utils/mutations";
-import { Container, Text, Heading, FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
+import { Container, Box, Text, Heading, FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
 
 
 function Signup(props) {
@@ -33,33 +33,39 @@ function Signup(props) {
 
   return (
     <Container>
+    <Box 
+    padding="4"  
+    bgGradient="linear(to-r,blue.900,gray.500,blue.900)" 
+    borderRadius="lg" 
+    color="white" 
+    maxW="3xl"> 
       <Link to="/login">
-        <Text color="#faf0ca" fontSize={{ base: "12px", md: "16px", lg: "18px" }}>
+        <Text color="white" fontSize="sm">
               ← Go to Login
         </Text>       
       </Link>
 
-      <Heading  color="#faf0ca" as="h2" size="xl" fontSize={{ base: "20px", md: "34px", lg: "40px" }} padding="3">Signup</Heading>
+      <Heading  color="white" as="h1" size="2xl"  padding="3">Signup</Heading>
       <FormControl>
-              <FormLabel color="#faf0ca">First Name</FormLabel>
+              <FormLabel color="white">First Name</FormLabel>
               <Input type="firstName" placeholder="Your First Name"
                   name="firstName"
                   id="firstName"
                   color="white"
                   onChange={handleChange}/>
-                  <FormLabel color="#faf0ca">Last Name</FormLabel>
+                  <FormLabel color="white">Last Name</FormLabel>
               <Input type="lastName" placeholder="Your Last Name"
                   name="lastName"
                   id="lastName"
                   color="white"
                   onChange={handleChange}/>
-              <FormLabel color="#faf0ca">Email address</FormLabel>
+              <FormLabel color="white">Email address</FormLabel>
               <Input type="email" placeholder="youremail@test.com"
                   name="email"
                   id="email"
                   color="white"
                   onChange={handleChange}/>
-              <FormLabel color="#faf0ca">Password</FormLabel>
+              <FormLabel color="white">Password</FormLabel>
               <Input placeholder="******" type="password"
                   name="password"            
                   id="pwd"
@@ -74,6 +80,7 @@ function Signup(props) {
                 Submit
               </Button>
       </FormControl>
+      </Box>
     </Container>
 
   );

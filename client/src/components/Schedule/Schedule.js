@@ -123,9 +123,15 @@ function Schedule(props) {
 
   return (
     <Container>
-      <Heading  color="#faf0ca" as="h2" size="xl" fontSize={{ base: "16px", md: "20px", lg: "30px" }} padding="3">Schedule your Appointment</Heading>
+    <Box 
+    padding="4"  
+    bgGradient="linear(to-r,blue.900,gray.500,blue.900)" 
+    borderRadius="lg" 
+    color="white" 
+    maxW="3xl"> 
+      <Heading  color="white" as="h2" size="xl" fontSize={{ base: "16px", md: "20px", lg: "30px" }} padding="3">Schedule your Appointment</Heading>
       <FormControl isRequired>
-              <FormLabel color="#faf0ca">Select day</FormLabel>
+              <FormLabel color="white">Select day</FormLabel>
               <DatePicker id="day" name="day"
                     dateFormat="MM/dd/yyyy"
                     selected={startDate}
@@ -142,11 +148,11 @@ function Schedule(props) {
                  { ok ?
                   <Box>
                     <Text  padding="3"></Text>
-                      <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }}>An email was sent with the information below </Text>
+                      <Text color="white" fontSize="sm">An email was sent with the information below </Text>
                       <Box borderRadius="md">
-                          <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }}>Day: {formState.day} </Text>
-                          <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }}>Time: {formState.time}</Text>
-                          <Text color="#faf0ca" fontSize={{ base: "8px", md: "12px", lg: "16px" }} >Link: <a href={aLink} target="_blank" rel="noreferrer">{aLink}</a></Text>
+                          <Text color="white" fontSize="sm">Day: {formState.day} </Text>
+                          <Text color="white" fontSize="sm">Time: {formState.time}</Text>
+                          <Text color="white" fontSize="sm">Link: <a href={aLink} target="_blank" rel="noreferrer">{aLink}</a></Text>
                       </Box>   
                   </Box>
                   : null
@@ -160,7 +166,7 @@ function Schedule(props) {
                     Submit
             </Button>
       </FormControl> 
-
+    </Box>
     </Container>
 
   );
